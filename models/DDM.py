@@ -19,17 +19,21 @@ def DDM_trial(v, vs, z, t, a, max_time=5000, full_return=False):
     """
     # z is the static starting point
     drift = z
+    
     # if false then trajectory is drift (bias)
     if full_return:
         trajectory = [drift]
+        
     # for ms in the range of time - max limit
     for ms in np.arange(t, max_time+t):
         # here we iterate over time so the drift rate is added
         # increase the bias with random value plus drift rate
         drift += np.random.randn()*vs + v
+        
         # if false then add new drift to list
         if full_return:
-            trajectory.append(drift)
+            trajectory.append(drift
+                              
         # if the drift is above/equal to threshold or smaller than zero
         # return answer with response time, trajectory
         if drift >= a: # drift hits upper bound
@@ -38,7 +42,8 @@ def DDM_trial(v, vs, z, t, a, max_time=5000, full_return=False):
             return {'answer': 0, 'rt': ms}
         elif drift <= 0: # drift hit lower bound
             if full_return:
-                return {'answer': 1, 'rt': ms, 'trajectory': trajectory}             
+                return {'answer': 1, 'rt': ms, 'trajectory': trajectory}  
+                              
             return {'answer': 1, 'rt': ms}
 
 # Example Plot
@@ -59,8 +64,10 @@ ss[1].set_ylabel('count')
 
 # simulate a bunch of trials & plot them
 trials = []
+                              
 for x in range(n_trials):
     trial = DDM_trial(v=v, vs=vs, z=z, t=t, a=a, full_return=True)
+                              
     if trial['answer'] == 0:
         ss[0].plot(np.arange(len(trial['trajectory']))+t, trial['trajectory'], alpha=0.3, c='b')
     else:
@@ -74,6 +81,7 @@ basic_trials = [pd.DataFrame([DDM_trial(v=v, vs=vs, z=z, t=t, a=a, full_return=F
                              for x in range(n_trials)]) for v in different_vs]
 
 f, ss = plt.subplots(len(different_vs),1, figsize=(12,24), sharex=True)
+                              
 for splt in range(len(different_vs)):
     ss[splt].set_xlim([0,2000])
     ss[splt].hist(basic_trials[splt][basic_trials[splt]['answer']==0]['rt'], alpha=0.5, color='b', bins=np.linspace(0,2000,50))
