@@ -2,7 +2,6 @@ from scipy.stats import norm
 from math import sqrt
 import numpy as np
 import matplotlib.pyplot as plt
-# matplotlib inline
 
 # Signal Detection Theory
 
