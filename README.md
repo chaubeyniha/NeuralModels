@@ -1,1 +1,1 @@
-# NEURAL MODELS FOR COGNITIVE PROCESSES
+# Neural Models for Cognitive Processes
